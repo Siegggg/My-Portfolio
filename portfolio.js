@@ -1,12 +1,6 @@
-/* ============================================
-   Portfolio - Interactive Features
-   ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // ========================================
-    // Navbar Scroll Effect
-    // ========================================
+
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
     
@@ -22,9 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
     
-    // ========================================
-    // Mobile Navigation Toggle
-    // ========================================
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
@@ -35,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
     
-    // Close mobile nav when clicking a link
     document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -44,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // ========================================
-    // Smooth Scroll for Anchor Links
-    // ========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -64,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // ========================================
-    // Active Navigation Link on Scroll
-    // ========================================
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-links a, .mobile-menu a');
     
@@ -90,9 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // ========================================
-    // Scroll Reveal Animation
-    // ========================================
     const revealElements = document.querySelectorAll('.project-card, .stat-card, .skill-category, .contact-link');
     
     const revealOnScroll = () => {
@@ -108,14 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // Add initial styles for reveal animation
     revealElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'all 0.6s ease';
     });
     
-    // Add revealed class styles
     const style = document.createElement('style');
     style.textContent = `
         .revealed {
@@ -126,11 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
     
     window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Initial check
-    
-    // ========================================
-    // Project Card Hover Effect
-    // ========================================
+    revealOnScroll(); 
+
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach(card => {
@@ -152,53 +128,40 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form data
             const formData = new FormData(contactForm);
             const name = formData.get('name');
             const email = formData.get('email');
             const message = formData.get('message');
             
-            // Simple validation
             if (!name || !email || !message) {
                 showNotification('Please fill in all fields', 'error');
                 return;
             }
             
-            // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showNotification('Please enter a valid email', 'error');
                 return;
             }
             
-            // Simulate form submission
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
+            const recipientEmail = 'siegfred_j1221@yahoo.com';
+            const subject = `Portfolio inquiry from ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Message sent successfully!', 'success');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+            window.location.href = mailtoLink;
+            showNotification('Opening your email client...', 'success');
+            contactForm.reset();
         });
     }
     
-    // ========================================
-    // Notification System
-    // ========================================
     function showNotification(message, type) {
-        // Remove existing notification if any
+
         const existingNotification = document.querySelector('.notification');
         if (existingNotification) {
             existingNotification.remove();
         }
         
-        // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
         notification.innerHTML = `
@@ -206,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="notification-close">&times;</button>
         `;
         
-        // Add styles
         notification.style.cssText = `
             position: fixed;
             top: 100px;
