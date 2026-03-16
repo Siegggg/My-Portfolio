@@ -1,6 +1,6 @@
 
 :root {
-    /* Color Palette */
+
     --bg-primary: #0a0a0f;
     --bg-secondary: #12121a;
     --bg-tertiary: #1a1a25;
@@ -15,15 +15,12 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --border-glow: rgba(99, 102, 241, 0.3);
     
-    /* Typography */
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
     
-    /* Spacing */
     --section-padding: 100px 0;
     --container-width: 1200px;
     
-    /* Effects */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
@@ -221,9 +218,6 @@ img {
 .nav-links a .text {
     position: relative;
     display: inline-block;
-    overflow: hidden;
-    line-height: 1;
-    height: 1em;
 }
 
 .nav-links a .text::before {
@@ -525,21 +519,12 @@ img {
 .profile-image {
     width: 280px;
     height: 280px;
-    border-radius: 50%;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--bg-tertiary);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: var(--shadow-md);
-}
-
-.profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
 }
 
 .profile-placeholder {
